@@ -49,6 +49,11 @@ const resolvers = {
       return dataSources.prisma.getUsers();
     },
   },
+  Mutation: {
+    createCategory: (_, { input }, { dataSources }) => {
+      return dataSources.prisma.createCategory(input);
+    },
+  },
   Book: {
     title: ({ title, year }) => {
       return `${title} written on ${year}`

@@ -1,3 +1,20 @@
+type Query {
+  users: [User]
+  categories: [Category]
+  contents: [Content]
+  hello(name: String!): String
+  books: [Book]
+  book(id: Int!): Book
+}
+
+type Mutation {
+  createCategory(input: createCategoryInput!): Category
+}
+
+input createCategoryInput {
+  name: String!
+}
+
 type Book {
   id: Int
   title: String
@@ -39,13 +56,4 @@ type Content {
   category: Category!
   createdAt: String
   updatedAt: String
-}
-
-type Query {
-  users: [User]
-  categories: [Category]
-  contents: [Content]
-  hello(name: String!): String
-  books: [Book]
-  book(id: Int!): Book
 }

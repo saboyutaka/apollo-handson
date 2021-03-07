@@ -12,6 +12,15 @@ class PrismaAPI extends DataSource {
     return prisma.content.findMany()
   }
 
+  createCategory(input) {
+    const name = input.name
+    return prisma.category.create({
+      data: {
+        name: name
+      }
+    })
+  }
+
   getCategories() {
     return prisma.category.findMany()
   }
