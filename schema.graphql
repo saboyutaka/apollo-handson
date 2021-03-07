@@ -1,0 +1,51 @@
+type Book {
+  id: Int
+  title: String
+  authorId: Int
+  author: Author
+  year: Int
+}
+
+type Author {
+  name: String
+  age: Int
+  contry: String
+}
+
+type User {
+  id: ID!
+  email: String
+  name: String
+  createdAt: String
+  updatedAt: String
+}
+
+type Category {
+  id: ID!
+  name: String
+  createdAt: String
+  updatedAt: String
+  contents: [Content]
+}
+
+type Content {
+  id: ID!
+  title: String
+  question: String
+  answer: String
+  answeredUserId: Int!
+  answeredUser: User!
+  categoryId: Int!
+  category: Category!
+  createdAt: String
+  updatedAt: String
+}
+
+type Query {
+  users: [User]
+  categories: [Category]
+  contents: [Content]
+  hello(name: String!): String
+  books: [Book]
+  book(id: Int!): Book
+}

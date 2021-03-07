@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now()) @map("craeted_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  contents  Content[]
+
+  @@map("categories")
+}
+
+model Content {
+  id             Int      @id @default(autoincrement())
+  title          String?
+  question       String?
+  answer         String?
+  answeredUserId Int      @map("anwered_user_id")
+  answeredUser   User     @relation(fields: [answeredUserId], references: [id])
+  categoryId     Int      @map("cagegory_id")
+  category       Category @relation(fields: [categoryId], references: [id])
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  Vote Vote[]
+  @@map("contents")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  answeredContents Content[]
+  Vote             Vote[]
+  @@map("users")
+}
+
+model Vote {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  contentId Int
+  user      User     @relation(fields: [userId], references: [id])
+  content   Content  @relation(fields: [contentId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("votes")
+}
