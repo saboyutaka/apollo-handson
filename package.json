@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^6.2.7",
+    "@graphql-tools/load": "^6.2.8",
     "@prisma/client": "^2.18.0",
     "apollo-server": "^2.21.0",
     "graphql": "^15.5.0"
